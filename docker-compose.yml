@@ -5,11 +5,13 @@ volumes:
 services:
   db:
     image: postgres:13.10
+    restart: always
     env_file: .env
     volumes:
       - pg_data:/var/lib/postgresql/data
   backend:
     build: ./backend/
+    restart: always
     env_file: .env
     volumes:
       - static:/backend_static
@@ -22,6 +24,7 @@ services:
       - static:/frontend_static
   gateway:
     build: ./gateway/
+    restart: always
     volumes:
       - static:/staticfiles/
     ports:
